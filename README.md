@@ -18,7 +18,7 @@
   3. Set the difficulty, initial word and the boolean for symmetric, and run on terminal.
 
 ## Acknowledgements:
-  1. The dictionary has is from multiple dictionaries all over the internet (sgb-words.txt,etc), and has been parsed into different word length dictionaries using Pandas
+  1. The dictionary has is from multiple dictionaries all over the internet (sgb-words.txt,etc), and has been parsed into different word length dictionaries using Python file ops
 
 ## To-Do:
   1. Make faster - Develop on C++, and use words as state space instead of letters 
