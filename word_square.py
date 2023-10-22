@@ -7,7 +7,6 @@ class TrieNode:
         self.children = [None] * 26
         self.EOW = False
 
-
 class Trie:
     def __init__(self):
         self.root = TrieNode()
@@ -52,36 +51,71 @@ class Trie:
 
         return node.EOW
 
-
-class WordSquare:
-    def __init__(self, s=None, symmetric=True, difficulty=5000):
+class Dictionary:
+    def __init__(self, word_length, difficulty):
+        self.word_length = word_length
         self.difficulty = difficulty
-        self.symmetric = symmetric
-        self.word_length = len(s) if s else 5
-        words = self.stringmaker(self.word_length)
-        self.wordlist = []
-        with open(words, "r") as text:
+
+        dictionary = self.dictionary_name(self.word_length)
+
+        self.word_list = []
+
+        with open(dictionary, "r") as text:
             text_file = text.read().splitlines()
-            for i in text_file:
-                if len(self.wordlist) >= self.difficulty:
+
+            for text_line in text_file:
+                if len(self.word_list) >= self.difficulty:
                     break
-                if len(i) == self.word_length:
-                    self.wordlist.append(i)
+
+                if len(text_line) == self.word_length:
+                    self.word_list.append(text_line)
 
         self.trie = Trie()
         self.build_dictionary()
 
+        return
+
+    def dictionary_name(self, num):
+        return (
+            "/Users/Adnaan/Downloads/Diro_Behavior/Code/Word Square/dictionaries/words_final_"
+            + str(num)
+            + "_letter.txt"
+        )
+
+    def build_dictionary(self):
+        for i in self.word_list:
+            if len(i) == self.word_length:
+                self.trie.insert(i)
+
+        return
+
+class WordSquare:
+    def __init__(self, s=None, symmetric=True, difficulty=5000):
+        self.symmetric = symmetric
+        self.word_length = len(s) if s else 5
+
+        self.dictionary = Dictionary(self.word_length, difficulty)
+        self.word_list = self.dictionary.word_list
+        self.trie = self.dictionary.trie
+
         self.square = [[None] * self.word_length for i in range(self.word_length)]
         self.squares = 0
+
         if s == None:
             self.seed = self.wordlist[rand.randint(0, len(self.wordlist))]
         else:
             self.seed = s.lower()
+
         for i in range(self.word_length):
             self.square[0][i] = self.seed[i]
             if self.symmetric:
                 self.square[i][0] = self.seed[i]
-        print("Trying: %s with difficulty %d" % (self.seed.upper(), self.difficulty))
+
+        print(
+            "Trying: %s with difficulty %d"
+            % (self.seed.upper(), self.dictionary.difficulty)
+        )
+
         self.guess(0)
 
         print(
@@ -93,20 +127,6 @@ class WordSquare:
                 self.seed,
             )
         )
-
-        return
-
-    def stringmaker(self, num):
-        return (
-            "/Users/Adnaan/Downloads/Diro_Behavior/Code/Word Square/dictionaries/words_final_"
-            + str(num)
-            + "_letter.txt"
-        )
-
-    def build_dictionary(self):
-        for i in self.wordlist:
-            if len(i) == self.word_length:
-                self.trie.insert(i)
 
         return
 
@@ -161,11 +181,10 @@ class WordSquare:
                 if self.symmetric:
                     self.square[col][row] = None
 
-
 if __name__ == "__main__":
-    word = "RETINA"
+    word = "stars"
 
-    difficulty = 3000
+    difficulty = 2000
 
     # try_word = WordSquare(word,True,difficulty)
 
