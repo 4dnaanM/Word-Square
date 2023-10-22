@@ -7,18 +7,18 @@
   Example of a 5x5 unsymmetric word square:
   S | T | A | R | S
   --- | --- | --- | --- | --- 
-  H | A | B | I | T
-  A | L | O | N | E
-  V | E | R | S | E
-  E | S | T | E | R
+  **H** | **A** | **B** | **I** | **T**
+  **A** | **L** | **O** | **N** | **E**
+  **V** | **E** | **R** | **S** | **E**
+  **E** | **S** | **T** | **E** | **R**
 - A symmetric word square is a square such that the words formed from a row and from the corresponding column are the same.
 - Example of a 5x5 symmetric word square:
   V | E | N | U | S
   --- | --- | --- | --- | --- 
-  E | X | I | S | T
-  N | I | C | H | E
-  U | S | H | E | R
-  S | T | E | R | N
+  **E** | **X** | **I** | **S** | **T**
+  **N** | **I** | **C** | **H** | **E**
+  **U** | **S** | **H** | **E** | **R**
+  **S** | **T** | **E** | **R** | **N**
 ## Functionality:
 - The program has the options to:
   1. Select a starting word to use as the first row, or use a random word (by setting the word as an empty string).
