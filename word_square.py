@@ -63,14 +63,21 @@ class WordSquare():
         
         self.difficulty = difficulty
         self.symmetric = symmetric
+        
         self.word_length = len(s) if s else 5
         words = self.stringmaker(self.word_length)
+        
         self.wordlist = []
+        
         with open(words,'r') as text:
+        
             text_file = text.read().splitlines()
+            
             for i in text_file:
+                
                 if(len(self.wordlist)>=self.difficulty):
                     break
+            
                 if(len(i)==self.word_length):
                     self.wordlist.append(i)
         
@@ -79,14 +86,18 @@ class WordSquare():
 
         self.square = [[None]*self.word_length for i in range(self.word_length)]
         self.squares = 0
+        
         if(s==None):
             self.seed = self.wordlist[rand.randint(0,len(self.wordlist))]
         else: 
             self.seed = s.lower()
+        
         for i in range(self.word_length):
             self.square[0][i]= self.seed[i]
             if(self.symmetric):self.square[i][0] = self.seed[i]
+        
         print("Trying: %s with difficulty %d"%(self.seed.upper(),self.difficulty))
+        
         self.guess(0)
 
         print("%d %s Word Square(s) of size %d Found for %s"%(self.squares,"Symmetric" if self.symmetric else "Unsymmetric",self.word_length,self.seed))
