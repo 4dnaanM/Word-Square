@@ -1,6 +1,6 @@
 import random as rand
 import re
-
+import os
 
 class TrieNode:
     def __init__(self):
@@ -77,7 +77,8 @@ class Dictionary:
 
     def dictionary_name(self, num):
         return (
-            "/Users/Adnaan/Downloads/Diro_Behavior/Code/Word Square/dictionaries/words_final_"
+            os.getcwd()
+            +"/dictionaries/words_final_"
             + str(num)
             + "_letter.txt"
         )
@@ -86,7 +87,6 @@ class Dictionary:
         for i in self.word_list:
             if len(i) == self.word_length:
                 self.trie.insert(i)
-
         return
 
 class WordSquare:
