@@ -27,8 +27,7 @@
 
 ## User Guide:
   1. Clone this repository, with the dictionaries. 
-  2. Change the part of the "stringmaker" method that says '/Users/Adnaan/Downloads/Diro_Behavior/Code/Word Square' to the path that your repository is on
-  3. Set the difficulty, initial word and the boolean for symmetric, and run on terminal.
+  2. Set the difficulty, initial word and the boolean for symmetric, and run.
 
 ## Acknowledgements:
   1. The dictionary has is from multiple dictionaries all over the internet (sgb-words.txt,etc), and has been parsed into different word length dictionaries using Python file ops
