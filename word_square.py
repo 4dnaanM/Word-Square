@@ -1,6 +1,12 @@
 import random as rand
-import re
 import os
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-w","--word", help = "Word to seed", type = str)
+parser.add_argument("-s","--symmetric", action = "store_true", help = "symmetric")
+parser.add_argument("-d","--difficulty", help = "difficulty",type = int)
+args = parser.parse_args()
 
 class TrieNode:
     def __init__(self):
@@ -15,41 +21,41 @@ class Trie:
         return ord(a) - ord("a")
 
     def insert(self, s: str):
-        node = self.root
-
+        node: TrieNode = self.root
+        assert node is not None
         for c in s:
             if node.children[self.index(c)] == None:
-                node.children[self.index(c)] = TrieNode()
+                node.children[self.index(c)] = TrieNode() # type: ignore
 
-            node = node.children[self.index(c)]
-
-        node.EOW = True
+            node = node.children[self.index(c)] # type: ignore
+        
+        node.EOW = True # type: ignore
 
         return True
 
-    def findstart(self, s: str) -> list:
+    def findstart(self, s):
         node = self.root
-
+        assert node is not None
         for i in range(len(s)):
-            if node.children[self.index(s[i])]:
-                node = node.children[self.index(s[i])]
+            if node.children[self.index(s[i])]: # type: ignore
+                node = node.children[self.index(s[i])] # type: ignore
 
             else:
                 return False
 
         return True
 
-    def find(self, s: str) -> list:
+    def find(self, s):
         node = self.root
 
         for i in range(len(s)):
-            if node.children[self.index(s[i])]:
-                node = node.children[self.index(s[i])]
+            if node.children[self.index(s[i])]: # type: ignore
+                node = node.children[self.index(s[i])] # type: ignore
 
             else:
                 return False
 
-        return node.EOW
+        return node.EOW # type: ignore
 
 class Dictionary:
     def __init__(self, word_length, difficulty):
@@ -90,7 +96,8 @@ class Dictionary:
         return
 
 class WordSquare:
-    def __init__(self, s=None, symmetric=True, difficulty=5000):
+    def __init__(self, s, symmetric, difficulty):
+        print("Word Square Generator")
         self.symmetric = symmetric
         self.word_length = len(s) if s else 5
 
@@ -102,7 +109,7 @@ class WordSquare:
         self.squares = 0
 
         if s == None:
-            self.seed = self.wordlist[rand.randint(0, len(self.wordlist))]
+            self.seed = self.word_list[rand.randint(0, len(self.word_list))]
         else:
             self.seed = s.lower()
 
@@ -182,10 +189,10 @@ class WordSquare:
                     self.square[col][row] = None
 
 if __name__ == "__main__":
-    word = "stars"
-
-    difficulty = 2000
+    word = args.word if args.word else input("Word: ")
+    symmetric = args.symmetric if args.symmetric else False
+    difficulty = args.difficulty if args.difficulty else int(input("Difficulty: "))
 
     # try_word = WordSquare(word,True,difficulty)
 
-    try_word = WordSquare(word, False, difficulty)
+    try_word = WordSquare(word, symmetric, difficulty)
